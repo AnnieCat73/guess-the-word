@@ -77,14 +77,33 @@ const validateInput = function (input) {
 };
 
 const makeGuess = function (letterGuess) {
-  letterGuess = letterGuess.toUppercase();
+  letterGuess = letterGuess.toUpperCase();
   if (guessedLetters.includes(letterGuess)) {
     message.innerText = "You have already guessed that letter, please try again!";
   }
   else {
     guessedLetters.push(letterGuess);
     console.log(guessedLetters);
+    //step 4
+    updateLetters();
   }
+};
+
+//step 4
+
+//function to show the guessed letters
+const updateLetters = function () {
+  guessed.innerHTML = "";
+  for(let letter of guessedLetters) {
+    let listItem = document.createElement("li");
+    listItem.innerText = letter;
+    guessedLetters.append(listItem);
+  }
+};
+
+//function to update the word in progress
+const updateWordInProgress = function (guessedLetters) {
+
 };
 
 
