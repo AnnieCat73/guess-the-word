@@ -83,9 +83,7 @@ const makeGuess = function (letterGuess) {
   else {
     guessedLetters.push(letterGuess);
     console.log(guessedLetters);
-    
     remainingGuessesCount(letterGuess);
-    
     updateGuessedLetters();
     updateWordInProgress(guessedLetters);
   }
@@ -115,7 +113,6 @@ const updateWordInProgress = function (guessedLetters) {
         updatedCharacters.push("•");
     }
   }
-  //console.log(updatedCharacters);
   paraProgress.innerText = updatedCharacters.join("");
   checkIfWonGame();
 };
@@ -133,14 +130,15 @@ const remainingGuessesCount = function (letterGuess) {
   
   if (remainingGuesses === 0) {
     message.innerHTML = `Game over! The word is <span class="highlight">${word}</span>.`;
-  }
-  else if (remainingGuesses === 1) {
-    remainingSpan.innerText = `You have ${remainingGuesses} guess`;
-  }
-  else {
-    remainingSpan.innerText = `You have ${remainingGuesses} guesses`;
+    startOver();
   }
   
+  else if (remainingGuesses === 1) {
+    remainingSpan.innerText = `${remainingGuesses} guess`;
+  }
+  else {
+    remainingSpan.innerText = `${remainingGuesses} guesses`;
+  }
 };
 
 
@@ -148,7 +146,7 @@ const remainingGuessesCount = function (letterGuess) {
 const checkIfWonGame = function () {
   if (word.toUpperCase() === paraProgress.innerText) {
     message.classList.add("win");
-    message.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
+    message.innerHTML = `<p class="highlight">You guessed the correct word! Congrats!</p>`;
     
     startOver();
   }
@@ -168,10 +166,9 @@ playAgainButton.addEventListener("click", function () {
   message.classList.remove("win");
   message.innerText = "";
   guessed.innerHTML = "";
-
   remainingGuesses = 8;
   guessedLetters = [];
-
+  
   remainingSpan.innerText =  `${remainingGuesses} guesses`;
   getWord();
 
@@ -179,7 +176,6 @@ playAgainButton.addEventListener("click", function () {
   paraRemaining.classList.remove("hide");
   guessed.classList.remove("hide");
   playAgainButton.classList.add("hide");
-  
 });
 
 
